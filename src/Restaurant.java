@@ -1,8 +1,13 @@
+import com.sun.source.tree.Tree;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.*;
 
 /**
  * @author Jason Gill
@@ -13,6 +18,7 @@ public class Restaurant {
     private String name;
     private Menu menu = new Menu();
     private ArrayList<Table> tables = new ArrayList<>();
+    private ArrayList<Reservation> reservations = new ArrayList<>();
     private ArrayList<Chef> chefs = new ArrayList<>();
     private ArrayList<Waiter> waiters = new ArrayList<>();
 
@@ -48,10 +54,36 @@ public class Restaurant {
                 }
             }
 
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new NoTablesFileException("Missing tables file");
         }
 
+    }
+
+    public void makeReservation(Table table, int numOfPeople, int customerId, LocalDateTime from, LocalDateTime to) {
+        reservations.add(new Reservation(table, numOfPeople, customerId, from, to));
+    }
+
+    public TreeMap<Integer, ArrayList<Table>> getAvailableTables(LocalDate date) {
+        TreeMap<Integer, ArrayList<Table>> availableTables = new TreeMap<>();
+        // assume open 12 pm - 9 pm
+        LocalTime openTime = LocalTime.of(12, 0);
+        LocalTime closeTime = LocalTime.of(21, 0);
+        for (int i = openTime.getHour(); i < closeTime.getHour(); i++) {
+            LocalDateTime hourStart = date.atTime(i, 0);
+            LocalDateTime hourEnd = date.atTime(i + 1, 0);
+            ArrayList<Table> availableTablesThisHour = new ArrayList<>(tables);
+            for (Reservation reservation : reservations) {
+                if (reservation.getEndTime().isAfter(hourStart) && reservation.getEndTime().isBefore((hourEnd))) {
+                    availableTablesThisHour.remove(reservation.getTable());
+                }
+                if (reservation.getStartTime().isAfter(hourStart) && reservation.getEndTime().isBefore(hourEnd)) {
+                    availableTablesThisHour.remove(reservation.getTable());
+                }
+            }
+            availableTables.put(hourStart.getHour(), availableTablesThisHour);
+        }
+
+        return availableTables;
     }
 }
