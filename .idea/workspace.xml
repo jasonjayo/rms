@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="creation of classes, initial set up of restaurant and table classes">
+    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menus.csv" beforeDir="false" afterPath="$PROJECT_DIR$/menus.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FoodItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FoodItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuCategory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +46,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
   }
 }</component>
@@ -58,9 +65,7 @@
       <workItem from="1667528792108" duration="50000" />
       <workItem from="1667678907440" duration="362000" />
       <workItem from="1667679280654" duration="11348000" />
-      <workItem from="1668087761579" duration="4641000" />
-      <workItem from="1668097042726" duration="154000" />
-      <workItem from="1668102181357" duration="2578000" />
+      <workItem from="1668102168547" duration="1758000" />
     </task>
     <task id="LOCAL-00001" summary="initial project setup">
       <created>1667391041151</created>
@@ -76,12 +81,12 @@
       <option name="project" value="LOCAL" />
       <updated>1667495095910</updated>
     </task>
-    <task id="LOCAL-00003" summary="creation of classes, initial set up of restaurant and table classes">
-      <created>1668088383381</created>
+    <task id="LOCAL-00003" summary="comment">
+      <created>1668090855542</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1668088383381</updated>
+      <updated>1668090855542</updated>
     </task>
     <option name="localTasksCounter" value="4" />
     <servers />
@@ -103,6 +108,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial project setup" />
     <MESSAGE value="creation of classes, initial set up of restaurant and table classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="creation of classes, initial set up of restaurant and table classes" />
+    <MESSAGE value="comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment" />
   </component>
 </project>
