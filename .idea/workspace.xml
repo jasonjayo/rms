@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="creation of classes, initial set up of restaurant and table classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Waiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Waiter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +61,7 @@
       <workItem from="1667528792108" duration="50000" />
       <workItem from="1667678907440" duration="362000" />
       <workItem from="1667679280654" duration="11348000" />
-      <workItem from="1668012801759" duration="2577000" />
+      <workItem from="1668087761579" duration="399000" />
     </task>
     <task id="LOCAL-00001" summary="initial project setup">
       <created>1667391041151</created>
