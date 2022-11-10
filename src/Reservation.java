@@ -9,17 +9,13 @@ public class Reservation {
     LocalDateTime startTime;
     LocalDateTime endTime;
 
-    public Reservation(Table table, int numOfPeople, int customerId, LocalDateTime startTime, LocalDateTime endTime) {
-        this.table = table;
+    public Reservation(int numOfPeople, int customerId, LocalDateTime startTime, LocalDateTime endTime) {
         this.numOfPeople = numOfPeople;
         this.customerId = customerId;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Table getTable() {
-        return table;
-    }
 
     public LocalDateTime getStartTime() {
         return startTime;

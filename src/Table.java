@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+
 public class Table {
     private int id;
     private int capacity;
+
+    private ArrayList<Reservation> reservations;
 
     public Table(int id, int capacity) {
         this.id = id;

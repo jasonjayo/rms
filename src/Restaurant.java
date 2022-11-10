@@ -2,8 +2,6 @@ import com.sun.source.tree.Tree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -34,6 +32,10 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public ArrayList<Table> getTables() {
@@ -77,8 +79,9 @@ public class Restaurant {
             for (Reservation reservation : reservations) {
                 if (reservation.getEndTime().isAfter(hourStart) && reservation.getEndTime().isBefore((hourEnd))) {
                     availableTablesThisHour.remove(reservation.getTable());
-                }
-                if (reservation.getStartTime().isAfter(hourStart) && reservation.getEndTime().isBefore(hourEnd)) {
+                } else if (reservation.getStartTime().isAfter(hourStart) && reservation.getEndTime().isBefore(hourEnd)) {
+                    availableTablesThisHour.remove(reservation.getTable());
+                } else if (reservation.getStartTime().isBefore(hourStart) && reservation.getEndTime().isAfter(hourEnd)) {
                     availableTablesThisHour.remove(reservation.getTable());
                 }
             }
