@@ -1,12 +1,9 @@
-import com.sun.source.tree.Tree;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
-// you smell
 
 /**
  * @author Jason Gill
@@ -15,7 +12,7 @@ public class Restaurant {
 
     private int id;
     private String name;
-    private Menu menu = new Menu();
+    private Menu menu = new Menu(new TreeMap<String, ArrayList<MenuCategory>>());
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
     private ArrayList<Chef> chefs = new ArrayList<>();
@@ -64,7 +61,7 @@ public class Restaurant {
     }
 
     public void makeReservation(Table table, int numOfPeople, int customerId, LocalDateTime from, LocalDateTime to) {
-        reservations.add(new Reservation(table, numOfPeople, customerId, from, to));
+        reservations.add(new Reservation(numOfPeople, customerId, from, to));
     }
 
     public TreeMap<Integer, ArrayList<Table>> getAvailableTables(LocalDate date) {
@@ -78,11 +75,11 @@ public class Restaurant {
             ArrayList<Table> availableTablesThisHour = new ArrayList<>(tables);
             for (Reservation reservation : reservations) {
                 if (reservation.getEndTime().isAfter(hourStart) && reservation.getEndTime().isBefore((hourEnd))) {
-                    availableTablesThisHour.remove(reservation.getTable());
+//                    availableTablesThisHour.remove(reservation.getTable());
                 } else if (reservation.getStartTime().isAfter(hourStart) && reservation.getEndTime().isBefore(hourEnd)) {
-                    availableTablesThisHour.remove(reservation.getTable());
+//                    availableTablesThisHour.remove(reservation.getTable());
                 } else if (reservation.getStartTime().isBefore(hourStart) && reservation.getEndTime().isAfter(hourEnd)) {
-                    availableTablesThisHour.remove(reservation.getTable());
+//                    availableTablesThisHour.remove(reservation.getTable());
                 }
             }
             availableTables.put(hourStart.getHour(), availableTablesThisHour);

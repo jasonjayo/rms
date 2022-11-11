@@ -69,9 +69,9 @@ public class Order {
          */
     }
 
-  //  public void noOfPossibleStatuses() {
+    //  public void noOfPossibleStatuses() {
 //    return statuses.length;
-    }
+    //}
 
 
 }
