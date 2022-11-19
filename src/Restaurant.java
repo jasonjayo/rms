@@ -37,8 +37,6 @@ public class Restaurant {
         this.reservations = reservations;
         this.chefs = chefs;
         this.tables = tables;
-
-//        initTables();
     }
 
     public String getName() {
@@ -53,41 +51,6 @@ public class Restaurant {
         return tables;
     }
 
-    // table information stored in CSV files and accessed through restaurant ID
-    public void initTables() throws NoTablesFileException {
-        try {
-            File tablesData = new File("tables.csv");
-            Scanner scanner = new Scanner(tablesData);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                // csv files in format restaurant id, table no., capacity
-                int[] tableData = Arrays.stream(line.split(",")).mapToInt(Integer::valueOf).toArray();
-                // if table is for this restaurant
-                if (tableData[0] == id) {
-                    tables.add(new Table(tableData[1], tableData[2]));
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new NoTablesFileException("Missing tables file");
-        }
-
-    }
-
-    public TreeMap<Integer, ArrayList<Table>> getAvailableTables(LocalDate date) {
-        TreeMap<Integer, ArrayList<Table>> availableTables = new TreeMap<>();
-        // assume open 12 pm - 9 pm
-
-        for (int i = openTime.getHour(); i + 2 < closeTime.getHour(); i++) {
-            LocalDateTime hourStart = date.atTime(i, 0);
-            LocalDateTime hourEnd = date.atTime(i + 2, 0);
-
-
-        }
-
-        return availableTables;
-    }
-
     public List<String> getAvailableStartTimes() {
         List<String> startTimes = new ArrayList<>();
         for (int i = openTime.getHour(); i + 2 <= closeTime.getHour(); i++) {
@@ -99,7 +62,6 @@ public class Restaurant {
     public List<Table> getAvailableTables(LocalDateTime dateTime, int numOfPeople) {
         ArrayList<Table> availableTablesThisHour = new ArrayList<>(tables);
         for (Table t : tables) {
-            // TODO: check for overlap
             if (t.getCapacity() < numOfPeople) {
                 availableTablesThisHour.remove(t);
                 continue;
@@ -109,7 +71,6 @@ public class Restaurant {
                     if (r.getStartTime().isBefore(dateTime.plusHours(2)) && dateTime.isBefore(r.getEndTime())) {
                         availableTablesThisHour.remove(t);
                     }
-                    // start1.before(end2) && start2.before(end1);
                 }
             }
         }
@@ -117,7 +78,14 @@ public class Restaurant {
     }
 
     public String createReservation(Table t, int numOfPeople, int customerId, LocalDateTime startTime) {
-        reservations.add(new Reservation(t, numOfPeople, customerId, startTime, startTime.plusHours(2)));
+        for (Reservation r : reservations) {
+            if (r.getStartTime().isBefore(startTime.plusHours(2)) && startTime.isBefore(r.getEndTime())) {
+                return "We couldn't create your reservation because the following reservation already exists for you during the given time: \n" + r;
+            }
+        }
+
+        Reservation reservation = new Reservation(t, numOfPeople, customerId, startTime, startTime.plusHours(2));
+        reservations.add(reservation);
 
 
         String reservationForCSV = String.format("%s,%s,%s,%s,%s\n", id, numOfPeople, startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), t.getId(), customerId);
@@ -128,10 +96,7 @@ public class Restaurant {
             throw new RuntimeException(e);
         }
 
-        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE, MMMM d u");
-
-        return String.format("From %s until %s on %s at %s for %d people. Table %d.", startTime.format(timeFormat), startTime.plusHours(2).format(timeFormat), startTime.format(dateFormat), name, numOfPeople, t.getId());
+        return String.format("%s At %s", reservation, name);
     }
 
     public Menu getMenu() {
@@ -157,7 +122,28 @@ public class Restaurant {
 
     public boolean cancelReservation(int customerId, LocalDateTime dateTime) {
         for (Reservation r : reservations) {
-            if (r.customerId == customerId && r.getStartTime() == dateTime) {
+            if (r.customerId == customerId && r.getStartTime().isEqual(dateTime)) {
+                try {
+                    File reservationsFile = new File("reservations.csv");
+                    Scanner scanner = new Scanner(reservationsFile);
+                    StringBuilder output = new StringBuilder();
+                    while (scanner.hasNextLine()) {
+                        String line = scanner.nextLine();
+                        String[] lineData = line.split(",");
+
+                        int CSV_restaurantId = Integer.parseInt(lineData[0]);
+                        LocalDateTime CSV_startTime = LocalDateTime.parse(lineData[2]);
+                        int CSV_customerId = Integer.parseInt(lineData[4]);
+
+                        if (!(CSV_startTime.equals(dateTime) && CSV_customerId == customerId && id == CSV_restaurantId)) {
+                            output.append(line);
+                            output.append("\n");
+                        }
+                    }
+                    Files.write(Paths.get("reservations.csv"), output.toString().getBytes());
+                } catch (IOException e) {
+                    return false;
+                }
                 return reservations.remove(r);
             }
         }
@@ -167,5 +153,9 @@ public class Restaurant {
     @Override
     public String toString() {
         return name;
+    }
+
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
     }
 }

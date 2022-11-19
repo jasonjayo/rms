@@ -1,5 +1,6 @@
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Reservation {
 
@@ -36,5 +37,13 @@ public class Reservation {
 
     public int getCustomerId() {
         return customerId;
+    }
+
+    public String toString() {
+
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE, MMMM d u");
+
+        return String.format("From %s until %s on %s for %d people. Table %d.", startTime.format(timeFormat), startTime.plusHours(2).format(timeFormat), startTime.format(dateFormat), numOfPeople, table.getId());
     }
 }

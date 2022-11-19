@@ -154,13 +154,10 @@ public class RestaurantManagementSystem {
 
             Reservation reservation = new Reservation(table, numOfPeople, customerId, startTime, startTime.plusHours(2));
 
-            if (reservationsData.containsKey(restaurantId)) {
-                reservationsData.get(restaurantId).add(reservation);
-            } else {
-                ArrayList<Reservation> reservationsForRestaurant = new ArrayList<>();
-                reservationsForRestaurant.add(reservation);
-                reservationsData.put(restaurantId, reservationsForRestaurant);
+            if (!reservationsData.containsKey(restaurantId)) {
+                reservationsData.put(restaurantId, new ArrayList<>());
             }
+            reservationsData.get(restaurantId).add(reservation);
 
         }
 
