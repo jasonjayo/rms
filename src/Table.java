@@ -9,6 +9,8 @@ public class Table {
     public Table(int id, int capacity) {
         this.id = id;
         this.capacity = capacity;
+
+        this.reservations = new ArrayList<>();
     }
 
     public int getId() {
@@ -20,6 +22,14 @@ public class Table {
     }
 
     public String toString() {
-        return String.format("[Table ID: %d, capacity: %d]", id, capacity);
+        return String.format("Table %d (capacity: %d)", id, capacity);
+    }
+
+    public void addReservation(Reservation r) {
+        this.reservations.add(r);
+    }
+
+    public ArrayList<Reservation> getReservations() {
+        return reservations;
     }
 }

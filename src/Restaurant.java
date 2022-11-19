@@ -1,8 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -12,19 +18,25 @@ public class Restaurant {
 
     private int id;
     private String name;
-    private Menu menu = new Menu(new TreeMap<String, ArrayList<MenuCategory>>());
+    private Menu menu;
     private ArrayList<Table> tables = new ArrayList<>();
     private ArrayList<Reservation> reservations = new ArrayList<>();
     private ArrayList<Chef> chefs = new ArrayList<>();
     private ArrayList<Waiter> waiters = new ArrayList<>();
+    private ArrayList<Customer> customers;
 
-    public Restaurant(String name, int id, Menu menu, ArrayList<Chef> chefs) throws NoTablesFileException {
+    LocalTime openTime = LocalTime.of(12, 0);
+    LocalTime closeTime = LocalTime.of(21, 0);
+
+    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, ArrayList<Customer> customers, ArrayList<Chef> chefs) {
         this.id = id;
         this.name = name;
         this.menu = menu;
         this.chefs = chefs;
+        this.tables = tables;
+        this.customers = customers;
 
-        initTables();
+//        initTables();
     }
 
     public String getName() {
@@ -67,24 +79,77 @@ public class Restaurant {
     public TreeMap<Integer, ArrayList<Table>> getAvailableTables(LocalDate date) {
         TreeMap<Integer, ArrayList<Table>> availableTables = new TreeMap<>();
         // assume open 12 pm - 9 pm
-        LocalTime openTime = LocalTime.of(12, 0);
-        LocalTime closeTime = LocalTime.of(21, 0);
-        for (int i = openTime.getHour(); i < closeTime.getHour(); i++) {
+
+        for (int i = openTime.getHour(); i + 2 < closeTime.getHour(); i++) {
             LocalDateTime hourStart = date.atTime(i, 0);
-            LocalDateTime hourEnd = date.atTime(i + 1, 0);
-            ArrayList<Table> availableTablesThisHour = new ArrayList<>(tables);
-            for (Reservation reservation : reservations) {
-                if (reservation.getEndTime().isAfter(hourStart) && reservation.getEndTime().isBefore((hourEnd))) {
-//                    availableTablesThisHour.remove(reservation.getTable());
-                } else if (reservation.getStartTime().isAfter(hourStart) && reservation.getEndTime().isBefore(hourEnd)) {
-//                    availableTablesThisHour.remove(reservation.getTable());
-                } else if (reservation.getStartTime().isBefore(hourStart) && reservation.getEndTime().isAfter(hourEnd)) {
-//                    availableTablesThisHour.remove(reservation.getTable());
-                }
-            }
-            availableTables.put(hourStart.getHour(), availableTablesThisHour);
+            LocalDateTime hourEnd = date.atTime(i + 2, 0);
+
+
         }
 
         return availableTables;
+    }
+
+    public List<String> getAvailableStartTimes() {
+        List<String> startTimes = new ArrayList<>();
+        for (int i = openTime.getHour(); i + 2 <= closeTime.getHour(); i++) {
+            startTimes.add(i + ":00");
+        }
+        return startTimes;
+    }
+
+    public List<Table> getAvailableTables(LocalDateTime dateTime, int numOfPeople) {
+        ArrayList<Table> availableTablesThisHour = new ArrayList<>(tables);
+        for (Table t : tables) {
+            // TODO: check for overlap
+            if (t.getCapacity() < numOfPeople) {
+                availableTablesThisHour.remove(t);
+                continue;
+            }
+            for (Reservation r : t.getReservations()) {
+                System.out.println(r.getStartTime());
+                System.out.println(dateTime.plusHours(2));
+                System.out.println(dateTime);
+                System.out.println(r.getEndTime());
+                if (r.getStartTime().isBefore(dateTime.plusHours(2)) && dateTime.isBefore(r.getEndTime())) {
+                    availableTablesThisHour.remove(t);
+                }
+                //start1.before(end2) && start2.before(end1);
+            }
+        }
+        return availableTablesThisHour;
+    }
+
+    public String createReservation(Table t, int numOfPeople, int customerId, LocalDateTime startTime) {
+        t.addReservation(new Reservation(numOfPeople, customerId, startTime, startTime.plusHours(2)));
+
+
+        String reservationForCSV = String.format("%s,%s,%s,%s,%s\n", id, numOfPeople, startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), t.getId(), customerId);
+
+        try {
+            Files.write(Paths.get("reservations.csv"), reservationForCSV.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("EEEE, MMMM d u");
+
+        return String.format("From %s until %s on %s at %s for %d people. Table %d.", startTime.format(timeFormat), startTime.plusHours(2).format(timeFormat), startTime.format(dateFormat), name, numOfPeople, t.getId());
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public int createCustomer(String name, String phoneNum) {
+        int id = (int) (Math.random() * Instant.now().getEpochSecond());
+        try {
+            String customerForCSV = String.format("%s,%s,%s\n", id, name, phoneNum);
+            Files.write(Paths.get("customers.csv"), customerForCSV.getBytes(), StandardOpenOption.APPEND);
+            return id;
+        } catch (IOException e) {
+            return 0;
+        }
     }
 }

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="menus csv">
+    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="tidy up">
+      <change afterPath="$PROJECT_DIR$/customers.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reservations.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restaurants.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/menus.csv" beforeDir="false" afterPath="$PROJECT_DIR$/menus.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FoodItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FoodItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MenuCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuCategory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Restaurant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" afterDir="false" />
@@ -50,6 +55,15 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="RMS" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="RestaurantManagementSystemSimulation" />
+      <module name="restaurant-management-system" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -81,7 +95,11 @@
       <workItem from="1668021009097" duration="39000" />
       <workItem from="1668087511707" duration="4979000" />
       <workItem from="1668097927639" duration="597000" />
-      <workItem from="1668102249866" duration="1838000" />
+      <workItem from="1668102249866" duration="2148000" />
+      <workItem from="1668105242474" duration="2507000" />
+      <workItem from="1668698818877" duration="2116000" />
+      <workItem from="1668770371831" duration="5477000" />
+      <workItem from="1668796513986" duration="19303000" />
     </task>
     <task id="LOCAL-00001" summary="initial project setup">
       <created>1667391041151</created>
@@ -111,11 +129,36 @@
       <option name="project" value="LOCAL" />
       <updated>1668090463451</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="created menus csv, added more cli logic">
+      <created>1668105071877</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668105071877</updated>
+    </task>
+    <task id="LOCAL-00006" summary="tidy up">
+      <created>1668136440455</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668136440455</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -133,7 +176,9 @@
     <MESSAGE value="creation of classes, initial set up of restaurant and table classes" />
     <MESSAGE value="started creating CLI menu, started reservation creation logic, some basic work done in reservation class" />
     <MESSAGE value="menus csv" />
-    <option name="LAST_COMMIT_MESSAGE" value="menus csv" />
+    <MESSAGE value="created menus csv, added more cli logic" />
+    <MESSAGE value="tidy up" />
+    <option name="LAST_COMMIT_MESSAGE" value="tidy up" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

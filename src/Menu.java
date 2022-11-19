@@ -1,16 +1,20 @@
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class Menu {
 
-    TreeMap<String, ArrayList<MenuCategory>> menu = new TreeMap<>();
+    ArrayList<MenuCategory> menu = new ArrayList<>();
 
+    public Menu() {
 
-    public Menu(TreeMap<String, ArrayList<MenuCategory>> menu) {
-        this.menu = menu;
     }
 
-    public TreeMap<String, ArrayList<MenuCategory>> getMenu() {
+
+//    public Menu(TreeMap<String, MenuCategory> menu) {
+//        this.menu = menu;
+//    }
+
+    public ArrayList<MenuCategory> getCategories() {
         return menu;
     }
+
 }
