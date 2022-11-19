@@ -23,18 +23,20 @@ public class Restaurant {
     private ArrayList<Reservation> reservations = new ArrayList<>();
     private ArrayList<Chef> chefs = new ArrayList<>();
     private ArrayList<Waiter> waiters = new ArrayList<>();
+    private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Customer> customers;
 
     LocalTime openTime = LocalTime.of(12, 0);
     LocalTime closeTime = LocalTime.of(21, 0);
 
-    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, ArrayList<Customer> customers, ArrayList<Chef> chefs) {
+    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, ArrayList<Customer> customers, ArrayList<Reservation> reservations, ArrayList<Chef> chefs) {
         this.id = id;
         this.name = name;
         this.menu = menu;
+        this.customers = customers;
+        this.reservations = reservations;
         this.chefs = chefs;
         this.tables = tables;
-        this.customers = customers;
 
 //        initTables();
     }
@@ -72,10 +74,6 @@ public class Restaurant {
 
     }
 
-    public void makeReservation(Table table, int numOfPeople, int customerId, LocalDateTime from, LocalDateTime to) {
-        reservations.add(new Reservation(numOfPeople, customerId, from, to));
-    }
-
     public TreeMap<Integer, ArrayList<Table>> getAvailableTables(LocalDate date) {
         TreeMap<Integer, ArrayList<Table>> availableTables = new TreeMap<>();
         // assume open 12 pm - 9 pm
@@ -106,22 +104,20 @@ public class Restaurant {
                 availableTablesThisHour.remove(t);
                 continue;
             }
-            for (Reservation r : t.getReservations()) {
-                System.out.println(r.getStartTime());
-                System.out.println(dateTime.plusHours(2));
-                System.out.println(dateTime);
-                System.out.println(r.getEndTime());
-                if (r.getStartTime().isBefore(dateTime.plusHours(2)) && dateTime.isBefore(r.getEndTime())) {
-                    availableTablesThisHour.remove(t);
+            for (Reservation r : reservations) {
+                if (r.getTable().equals(t)) {
+                    if (r.getStartTime().isBefore(dateTime.plusHours(2)) && dateTime.isBefore(r.getEndTime())) {
+                        availableTablesThisHour.remove(t);
+                    }
+                    // start1.before(end2) && start2.before(end1);
                 }
-                //start1.before(end2) && start2.before(end1);
             }
         }
         return availableTablesThisHour;
     }
 
     public String createReservation(Table t, int numOfPeople, int customerId, LocalDateTime startTime) {
-        t.addReservation(new Reservation(numOfPeople, customerId, startTime, startTime.plusHours(2)));
+        reservations.add(new Reservation(t, numOfPeople, customerId, startTime, startTime.plusHours(2)));
 
 
         String reservationForCSV = String.format("%s,%s,%s,%s,%s\n", id, numOfPeople, startTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME), t.getId(), customerId);
@@ -151,5 +147,25 @@ public class Restaurant {
         } catch (IOException e) {
             return 0;
         }
+    }
+
+    public Order createOrder(int tableId) {
+        Order o = new Order(tableId);
+        orders.add(o);
+        return o;
+    }
+
+    public boolean cancelReservation(int customerId, LocalDateTime dateTime) {
+        for (Reservation r : reservations) {
+            if (r.customerId == customerId && r.getStartTime() == dateTime) {
+                return reservations.remove(r);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -17,4 +17,13 @@ public class Menu {
         return menu;
     }
 
+    public ArrayList<FoodItem> getAllItems() {
+        ArrayList<FoodItem> allItems = new ArrayList<>();
+
+        for (MenuCategory mc : menu) {
+            allItems.addAll(mc.getFood());
+        }
+        return allItems;
+    }
+
 }

@@ -4,13 +4,13 @@ public class Table {
     private int id;
     private int capacity;
 
-    private ArrayList<Reservation> reservations;
+//    private ArrayList<Reservation> reservations;
 
     public Table(int id, int capacity) {
         this.id = id;
         this.capacity = capacity;
 
-        this.reservations = new ArrayList<>();
+//        this.reservations = new ArrayList<>();
     }
 
     public int getId() {
@@ -25,11 +25,11 @@ public class Table {
         return String.format("Table %d (capacity: %d)", id, capacity);
     }
 
-    public void addReservation(Reservation r) {
-        this.reservations.add(r);
-    }
+//    public void addReservation(Reservation r) {
+//        this.reservations.add(r);
+//    }
 
-    public ArrayList<Reservation> getReservations() {
-        return reservations;
-    }
+//    public ArrayList<Reservation> getReservations() {
+////        return reservations;
+//    }
 }

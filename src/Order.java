@@ -51,9 +51,9 @@ public class Order {
         for (FoodItem food : newOrder) {
             nameAndPrice += food + "\n";
         }
-        String bill = String.format("%30s%2f\n", "Total Bill is : ", getBillTotal());
-        String tip = String.format("%30s%2f\n", "Added Tip is : ", getTip());
-        return nameAndPrice + bill + tip;
+        String bill = String.format("%-20s %s%.2f\n", "Total bill is ", "EUR ", getBillTotal());
+        String tip = String.format("%-20s %s%.2f\n", "Added tip is ", "EUR ", getTip());
+        return nameAndPrice + "=".repeat(30) + "\n" + bill + tip;
 //MIGHT NEED FIXING !!!!
     }
 

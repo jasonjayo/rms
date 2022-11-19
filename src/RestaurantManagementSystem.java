@@ -26,7 +26,7 @@ public class RestaurantManagementSystem {
         try {
             initRestaurantData();
         } catch (FileNotFoundException e) {
-            System.out.println("Warning: The tables data file is missing.");
+            System.out.println("Warning: At least one CSV file is missing: " + e.getMessage());
         }
 
         try {
@@ -41,14 +41,19 @@ public class RestaurantManagementSystem {
                 int id = Integer.parseInt(line[0]);
                 String name = line[1];
 
-                Restaurant restaurant = new Restaurant(name, id, tablesData.get(id), menusData.get(id), customers, new ArrayList<>());
+                // ensure null values are never passed to constructor
+                tablesData.computeIfAbsent(id, k -> new ArrayList<>());
+                menusData.computeIfAbsent(id, k -> new Menu());
+                reservationsData.computeIfAbsent(id, k -> new ArrayList<>());
+
+                Restaurant restaurant = new Restaurant(name, id, tablesData.get(id), menusData.get(id), customers, reservationsData.get(id), new ArrayList<>());
                 restaurants.add(restaurant);
 
 
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("Warning: The restaurants data file is missing.");
+            System.out.println("Warning: The restaurants.csv file is missing.");
             System.exit(1);
         }
 
@@ -137,8 +142,25 @@ public class RestaurantManagementSystem {
             int numOfPeople = Integer.parseInt(reservationData[1]);
             LocalDateTime startTime = LocalDateTime.parse(reservationData[2]);
             int tableId = Integer.parseInt(reservationData[3]);
-            String phoneNum = reservationData[4];
             int customerId = Integer.parseInt(reservationData[4]);
+
+            Table table = null;
+            ArrayList<Table> tables = tablesData.get(restaurantId);
+            for (Table t : tables) {
+                if (t.getId() == tableId) {
+                    table = t;
+                }
+            }
+
+            Reservation reservation = new Reservation(table, numOfPeople, customerId, startTime, startTime.plusHours(2));
+
+            if (reservationsData.containsKey(restaurantId)) {
+                reservationsData.get(restaurantId).add(reservation);
+            } else {
+                ArrayList<Reservation> reservationsForRestaurant = new ArrayList<>();
+                reservationsForRestaurant.add(reservation);
+                reservationsData.put(restaurantId, reservationsForRestaurant);
+            }
 
         }
 

@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="tidy up">
-      <change afterPath="$PROJECT_DIR$/customers.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reservations.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/restaurants.csv" afterDir="false" />
+    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="wrote customer class, added support for customers.csv, reservations.csv, finished reservation creation via menu functionality, refactored getAvailableTables">
+      <change afterPath="$PROJECT_DIR$/orders.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menus.csv" beforeDir="false" afterPath="$PROJECT_DIR$/menus.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FoodItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FoodItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/customers.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menus.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reservations.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reservations.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MenuCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reservation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Restaurant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tables.csv" beforeDir="false" afterPath="$PROJECT_DIR$/tables.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +97,7 @@
       <workItem from="1668105242474" duration="2507000" />
       <workItem from="1668698818877" duration="2116000" />
       <workItem from="1668770371831" duration="5477000" />
-      <workItem from="1668796513986" duration="19303000" />
+      <workItem from="1668796513986" duration="27381000" />
     </task>
     <task id="LOCAL-00001" summary="initial project setup">
       <created>1667391041151</created>
@@ -143,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668136440455</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="wrote customer class, added support for customers.csv, reservations.csv, finished reservation creation via menu functionality, refactored getAvailableTables">
+      <created>1668870821381</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668870821381</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +183,15 @@
     <MESSAGE value="menus csv" />
     <MESSAGE value="created menus csv, added more cli logic" />
     <MESSAGE value="tidy up" />
-    <option name="LAST_COMMIT_MESSAGE" value="tidy up" />
+    <MESSAGE value="wrote customer class, added support for customers.csv, reservations.csv, finished reservation creation via menu functionality, refactored getAvailableTables" />
+    <option name="LAST_COMMIT_MESSAGE" value="wrote customer class, added support for customers.csv, reservations.csv, finished reservation creation via menu functionality, refactored getAvailableTables" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Reservation" memberName="customerId" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
