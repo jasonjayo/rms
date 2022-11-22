@@ -1,11 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -24,12 +22,12 @@ public class Restaurant {
     private ArrayList<Chef> chefs = new ArrayList<>();
     private ArrayList<Waiter> waiters = new ArrayList<>();
     private ArrayList<Order> orders = new ArrayList<>();
-    private ArrayList<Customer> customers;
+    private HashMap<Integer, Customer> customers;
 
     LocalTime openTime = LocalTime.of(12, 0);
     LocalTime closeTime = LocalTime.of(21, 0);
 
-    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, ArrayList<Customer> customers, ArrayList<Reservation> reservations, ArrayList<Chef> chefs) {
+    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, HashMap<Integer, Customer> customers, ArrayList<Reservation> reservations, ArrayList<Chef> chefs) {
         this.id = id;
         this.name = name;
         this.menu = menu;
@@ -79,7 +77,7 @@ public class Restaurant {
 
     public String createReservation(Table t, int numOfPeople, int customerId, LocalDateTime startTime) {
         for (Reservation r : reservations) {
-            if (r.getStartTime().isBefore(startTime.plusHours(2)) && startTime.isBefore(r.getEndTime())) {
+            if (r.getStartTime().isBefore(startTime.plusHours(2)) && startTime.isBefore(r.getEndTime()) && r.getCustomerId() == customerId && customerId != 0) {
                 return "We couldn't create your reservation because the following reservation already exists for you during the given time: \n" + r;
             }
         }
@@ -115,9 +113,19 @@ public class Restaurant {
     }
 
     public Order createOrder(int tableId) {
-        Order o = new Order(tableId);
+        Order o = new Order(tableId, id);
         orders.add(o);
         return o;
+    }
+
+    public ArrayList<Order> getOutstandingOrder() {
+        ArrayList<Order> outstandingOrders = new ArrayList<>();
+        for (Order o : orders) {
+            if (o.getStatus() != Order.Status.PAID) {
+                outstandingOrders.add(o);
+            }
+        }
+        return outstandingOrders;
     }
 
     public boolean cancelReservation(int customerId, LocalDateTime dateTime) {

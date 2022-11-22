@@ -1,13 +1,11 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class RestaurantManagementSystem {
     Scanner scanner;
@@ -18,8 +16,9 @@ public class RestaurantManagementSystem {
     TreeMap<Integer, Menu> menusData = new TreeMap<>();
     TreeMap<Integer, ArrayList<Reservation>> reservationsData = new TreeMap<>();
 
-    ArrayList<Customer> customers = new ArrayList<>();
+    HashMap<Integer, Customer> customers = new HashMap<>();
 
+    ScheduledExecutorService scheduledExecutor;
 
     public RestaurantManagementSystem() {
 
@@ -57,7 +56,54 @@ public class RestaurantManagementSystem {
             System.exit(1);
         }
 
+        scheduledExecutor = Executors.newScheduledThreadPool(1);
+//        scheduledExecutor.scheduleAtFixedRate(this::sendReminders, 0, 1, TimeUnit.MINUTES);
+    }
 
+    public void stopRemindersService() {
+        scheduledExecutor.shutdown();
+    }
+
+    public void sendReminders() {
+        for (ArrayList<Reservation> reservationsList : reservationsData.values()) {
+            for (Reservation r : reservationsList) {
+                System.out.printf("AUTO REMINDER SYSTEM: System sent a reminder to customer %s at %s about the following reservation: \n %s\n", customers.get(r.getCustomerId()).getName(), customers.get(r.getCustomerId()).getPhoneNum(), r);
+            }
+        }
+    }
+
+    public HashMap<LocalDate, Double> getIncomeSummary(Restaurant r, LocalDate from, LocalDate to) {
+
+        HashMap<LocalDate, Double> output = new HashMap<>();
+
+        try {
+
+            File restaurantsData = new File("orders.csv");
+            Scanner scanner = new Scanner(restaurantsData);
+
+            while (scanner.hasNextLine()) {
+
+                String[] data = scanner.nextLine().split(",");
+                LocalDate date = LocalDateTime.parse(data[0]).toLocalDate();
+                int restaurantId = Integer.parseInt(data[1]);
+                double income = Double.parseDouble(data[2]);
+
+                if (date.isAfter(from.minusDays(1)) && date.isBefore(to.plusDays(1)) && restaurantId == r.getId()) {
+                    double subTotal = 0;
+                    if (output.containsKey(date)) {
+                        subTotal = output.get(date);
+                    }
+                    output.put(date, subTotal + income);
+                }
+
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Warning: The order.csv file is missing.");
+            System.exit(1);
+        }
+
+        return output;
     }
 
     public void initRestaurantData() throws FileNotFoundException {
@@ -128,7 +174,7 @@ public class RestaurantManagementSystem {
             String name = customerData[1];
             String phoneNum = customerData[2];
 
-            customers.add(new Customer(id, name, phoneNum));
+            customers.put(id, new Customer(id, name, phoneNum));
 
         }
 

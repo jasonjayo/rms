@@ -39,6 +39,10 @@ public class Reservation {
         return customerId;
     }
 
+    public boolean isWalkIn() {
+        return customerId == 0;
+    }
+
     public String toString() {
 
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");

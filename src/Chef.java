@@ -1,6 +1,6 @@
 public class Chef {
     public void chefSettingStatus(Order o) {
-        o.setOrderStatus(2);
+//        o.setOrderStatus(2);
     }
 
 }

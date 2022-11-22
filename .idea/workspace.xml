@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="reservations now belong to a Restaurant instead of a Table, added ability to take order, added method to cancel reservation, bug fixes">
+    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/customers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/customers.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orders.csv" beforeDir="false" afterPath="$PROJECT_DIR$/orders.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reservations.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reservations.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reservation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Restaurant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" afterDir="false" />
@@ -37,17 +40,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="RMS" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="RestaurantManagementSystemSimulation" />
@@ -92,7 +98,10 @@
       <workItem from="1668105242474" duration="2507000" />
       <workItem from="1668698818877" duration="2116000" />
       <workItem from="1668770371831" duration="5477000" />
-      <workItem from="1668796513986" duration="38497000" />
+      <workItem from="1668796513986" duration="38883000" />
+      <workItem from="1669046164059" duration="3655000" />
+      <workItem from="1669050408434" duration="870000" />
+      <workItem from="1669112984552" duration="17648000" />
     </task>
     <task id="LOCAL-00001" summary="initial project setup">
       <created>1667391041151</created>
@@ -150,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668882241406</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes">
+      <created>1668898717560</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668898717560</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +203,8 @@
     <MESSAGE value="tidy up" />
     <MESSAGE value="wrote customer class, added support for customers.csv, reservations.csv, finished reservation creation via menu functionality, refactored getAvailableTables" />
     <MESSAGE value="reservations now belong to a Restaurant instead of a Table, added ability to take order, added method to cancel reservation, bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="reservations now belong to a Restaurant instead of a Table, added ability to take order, added method to cancel reservation, bug fixes" />
+    <MESSAGE value="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

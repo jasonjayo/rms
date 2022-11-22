@@ -11,8 +11,6 @@ public class RestaurantManagementSystemMenu {
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yy");
     private static final String INCORRECT_DATE_MESSAGE = "Please enter a valid date in the format dd/mm/yy. e.g., 12/6/22";
     private static final String INCORRECT_TIME_MESSAGE = "Please enter a valid time in the format hh:ss using the 24-hour clock. e.g., 15:00";
-
-
     private Restaurant currentRestaurant;
 
     public RestaurantManagementSystemMenu() {
@@ -30,40 +28,25 @@ public class RestaurantManagementSystemMenu {
 
             System.out.println("Choose an option to continue:");
             //noinspection SpellCheckingInspection
-            System.out.println("M)ake a reservation C)ancel a reservation S)ee menu O)rder P)ick another restaurant Q)uit");
+            System.out.println("M)ake a reservation C)ancel a reservation W)alk-in booking V)iew menu O)rder R)equest Bill S)elect another restaurant P)ay Bill I)ncome summary Q)uit");
             String input = scanner.nextLine().toUpperCase();
 
             switch (input) {
                 case "M":
                     System.out.println("For what date are you creating a reservation? (dd/mm/yy)");
-                    LocalDate date = null;
-                    while (date == null) {
-                        try {
-                            date = LocalDate.parse(scanner.nextLine(), DATE_FORMAT);
-                        } catch (DateTimeParseException e) {
-                            System.out.println(INCORRECT_DATE_MESSAGE);
-                        }
-                    }
+                    LocalDate date = getDate();
 
                     System.out.println("Please choose a time:");
                     LocalTime startTime = LocalTime.parse(getChoice(new ArrayList<>(currentRestaurant.getAvailableStartTimes())));
 
                     System.out.println("How many people will be dining?");
-                    int numOfPeople = 0;
-                    while (numOfPeople < 2) {
-                        if (scanner.hasNextInt()) {
-                            numOfPeople = scanner.nextInt();
-                        } else {
-                            scanner.next(); // flush input
-                        }
-                        System.out.println("Please enter valid input. Note that a reservation must contain at least 2 people.");
-                    }
+                    int numOfPeople = getNumberOfPeople();
 
                     LocalDateTime dateTime = LocalDateTime.of(date, startTime);
                     List<Table> availableTables = currentRestaurant.getAvailableTables(dateTime, numOfPeople);
                     if (availableTables.size() == 0) {
                         System.out.println("Sorry! We don't have any tables with suitable capacity for that time.");
-                        scanner.nextLine(); // consumes \n after int input above
+                        //scanner.nextLine(); // consumes \n after int input above
                         break;
                     }
                     System.out.println("Here's a list of the available tables for that time. Please choose your preferred table.");
@@ -106,7 +89,7 @@ public class RestaurantManagementSystemMenu {
                     System.out.println(currentRestaurant.createReservation(table, numOfPeople, customerId, dateTime));
 
                     break;
-                case "S":
+                case "V":
                     for (MenuCategory mc : currentRestaurant.getMenu().getCategories()) {
                         System.out.printf("\n%s\n%10s%s\n%s\n", "=".repeat(30), "", mc.getName().toUpperCase(), "=".repeat(30));
                         for (FoodItem food : mc.getFood()) {
@@ -114,8 +97,88 @@ public class RestaurantManagementSystemMenu {
                         }
                     }
                     break;
-                case "P":
+                case "S":
                     currentRestaurant = getChoice(rms.getRestaurants());
+                    break;
+
+                case "P":
+                    System.out.println("Choose an order:");
+                    Order o = getChoice(currentRestaurant.getOutstandingOrder());
+                    System.out.println("If you'd like to tip, please enter the amount in decimal format. If not, enter 0");
+                    double tip = -1;
+                    while (tip < 0) {
+                        if (scanner.hasNextDouble()) {
+                            tip = scanner.nextDouble();
+                        } else {
+                            System.out.println("Please enter valid input. e.g., 8.0 or 4.35");
+                            scanner.next();
+                        }
+                    }
+                    o.setTip(tip);
+                    scanner.nextLine(); // consumes \n after double input above
+                    System.out.println("Choose payment method:");
+                    String paymentMethod = getChoice(new ArrayList<String>(Arrays.asList("Card", "Cash")));
+                    if (paymentMethod.equalsIgnoreCase("card")) {
+                        String cardNumber;
+                        String csv;
+                        String expiry;
+                        boolean paymentComplete = false;
+
+                        while (!paymentComplete) {
+                            cardNumber = "";
+                            csv = "";
+                            expiry = "";
+
+                            System.out.println("Please enter your 16-digit card number:");
+                            while (cardNumber.equals("")) {
+                                if (scanner.hasNextLine()) {
+                                    cardNumber = scanner.nextLine();
+                                }
+                            }
+                            System.out.println("Please enter your card's CSV code:");
+                            while (csv.equals("")) {
+                                if (scanner.hasNextLine()) {
+                                    csv = scanner.nextLine();
+                                }
+                            }
+                            System.out.println("Please enter your card's expiry date (mm/yy):");
+                            while (expiry.equals("")) {
+                                if (scanner.hasNextLine()) {
+                                    expiry = scanner.nextLine();
+                                }
+                            }
+                            paymentComplete = o.payBillByCard(cardNumber, expiry, csv);
+                            if (!paymentComplete) {
+                                System.out.println("Payment failed. Please try again.");
+                            } else {
+                                System.out.println("Payment successful. Thank you!");
+                            }
+                        }
+
+                    } else if (paymentMethod.equalsIgnoreCase(("cash"))) {
+                        boolean paymentComplete = false;
+                        System.out.println("What is the total value of the cash you are paying with? e.g., 4.00");
+                        while (!paymentComplete) {
+                            double givenAmount = 0;
+                            while (givenAmount == 0) {
+                                if (scanner.hasNextDouble()) {
+                                    givenAmount = scanner.nextDouble();
+                                } else {
+                                    scanner.next(); // flush input
+                                    System.out.println("Please enter valid input.");
+                                }
+                            }
+                            scanner.nextLine(); // consumes \n after double input above
+                            double change = o.payBillByCash(givenAmount);
+                            paymentComplete = change != -1;
+                            if (!paymentComplete) {
+                                System.out.println("Payment failed. Please try again. Make sure you've given enough cash.");
+                            } else {
+                                System.out.printf("Payment successful. Thank you! Change given: EUR %.2f\n", change);
+
+                            }
+                        }
+                    }
                     break;
                 case "C":
                     cancelReservation();
@@ -137,14 +200,59 @@ public class RestaurantManagementSystemMenu {
                         }
 
                     }
+                    order.setOrderStatus(Order.Status.TAKEN);
                     System.out.println("Here's a summary of the order:");
                     System.out.println(order);
                     break;
+                case "I":
+                    System.out.println("Please enter the from date in the format dd/mm/yy:");
+                    LocalDate fromDateOfIncome = getDate();
+
+                    System.out.println("Please enter the to date in the format dd/mm/yy");
+                    LocalDate toDateOfIncome = getDate();
+
+                    HashMap<LocalDate, Double> result = rms.getIncomeSummary(currentRestaurant, fromDateOfIncome, toDateOfIncome);
+                    System.out.printf("Showing income generated by %s each day from %s to %s inclusive:\n", currentRestaurant.getName(), fromDateOfIncome, toDateOfIncome);
+                    result.forEach((day, total) -> {
+                        System.out.printf("%-20s EUR %.2f\n", day, total);
+                    });
+                    break;
+                case "W":
+                    numOfPeople = getNumberOfPeople();
+                    System.out.println("Please choose a table from the list of currently available tables:");
+                    Table tableForBooking = getChoice(currentRestaurant.getAvailableTables(LocalDateTime.now(), numOfPeople));
+                    System.out.println(currentRestaurant.createReservation(tableForBooking, numOfPeople, 0, LocalDateTime.now()));
+                    break;
                 case "Q":
+                    rms.stopRemindersService();
                     running = false;
                     break;
             }
         }
+    }
+
+    public LocalDate getDate() {
+        LocalDate date = null;
+        while (date == null) {
+            try {
+                date = LocalDate.parse(scanner.nextLine(), DATE_FORMAT);
+            } catch (DateTimeParseException e) {
+                System.out.println(INCORRECT_DATE_MESSAGE);
+            }
+        }
+        return date;
+    }
+
+    public LocalTime getTime() {
+        LocalTime time = null;
+        while (time == null) {
+            try {
+                time = LocalTime.parse(scanner.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println(INCORRECT_TIME_MESSAGE);
+            }
+        }
+        return time;
     }
 
     public <T> T getChoice(List<T> options) {
@@ -173,6 +281,21 @@ public class RestaurantManagementSystemMenu {
             }
             System.out.println("Please enter valid input.");
         }
+    }
+
+    public int getNumberOfPeople() {
+        System.out.println("How many people will be dining?");
+        int numOfPeople = 0;
+        while (numOfPeople < 2) {
+            if (scanner.hasNextInt()) {
+                numOfPeople = scanner.nextInt();
+                scanner.nextLine(); // consumes \n after int input above
+            } else {
+                scanner.next(); // flush input
+            }
+            System.out.println("Please enter valid input. Note that a reservation must contain at least 2 people.");
+        }
+        return numOfPeople;
     }
 
     public void cancelReservation() {
