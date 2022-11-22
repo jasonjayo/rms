@@ -115,6 +115,8 @@ public class Order {
             saveOrder();
         }
 
+        this.orderStatus = s;
+
         /*
         maybe the orderStatus should use an array of strings of statuses,
          which I then change by incrementing i, after a wee timer of like

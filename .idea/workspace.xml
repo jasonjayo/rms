@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes">
+    <list default="true" id="d4133e8d-6834-4dd4-8ba4-af7c32256e94" name="Changes" comment="added support for paying for orders by card or cash, sending reminders to customers, getting income summary">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/customers.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orders.csv" beforeDir="false" afterPath="$PROJECT_DIR$/orders.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reservations.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reservations.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Chef.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +95,7 @@
       <workItem from="1668796513986" duration="38883000" />
       <workItem from="1669046164059" duration="3655000" />
       <workItem from="1669050408434" duration="870000" />
-      <workItem from="1669112984552" duration="17648000" />
+      <workItem from="1669112984552" duration="18217000" />
     </task>
     <task id="LOCAL-00001" summary="initial project setup">
       <created>1667391041151</created>
@@ -166,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668898717560</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added support for paying for orders by card or cash, sending reminders to customers, getting income summary">
+      <created>1669136855877</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669136855877</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,9 +205,19 @@
     <MESSAGE value="wrote customer class, added support for customers.csv, reservations.csv, finished reservation creation via menu functionality, refactored getAvailableTables" />
     <MESSAGE value="reservations now belong to a Restaurant instead of a Table, added ability to take order, added method to cancel reservation, bug fixes" />
     <MESSAGE value="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented functionality to cancel reservation, added check to prevent same customer having 2 concurrent reservations at same restaurant, other changes" />
+    <MESSAGE value="added support for paying for orders by card or cash, sending reminders to customers, getting income summary" />
+    <option name="LAST_COMMIT_MESSAGE" value="added support for paying for orders by card or cash, sending reminders to customers, getting income summary" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Restaurant.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Reservation" memberName="customerId" />

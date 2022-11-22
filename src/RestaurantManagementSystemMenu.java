@@ -102,8 +102,13 @@ public class RestaurantManagementSystemMenu {
                     break;
 
                 case "P":
+                    ArrayList<Order> outstandingOrders = currentRestaurant.getOutstandingOrder();
+                    if (outstandingOrders.size() == 0) {
+                        System.out.println("There are no unpaid orders.");
+                        break;
+                    }
                     System.out.println("Choose an order:");
-                    Order o = getChoice(currentRestaurant.getOutstandingOrder());
+                    Order o = getChoice(outstandingOrders);
                     System.out.println("If you'd like to tip, please enter the amount in decimal format. If not, enter 0");
                     double tip = -1;
                     while (tip < 0) {
