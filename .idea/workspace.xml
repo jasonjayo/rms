@@ -4,51 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4faca3a7-fc5e-41fb-8c41-06e0f16b3013" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Bill.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Chef.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/FxFXMLController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemSimulation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Staff.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/rms/restaurantmanagementsystemgui/hello-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/rms/restaurantmanagementsystemgui/menu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/staff.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4faca3a7-fc5e-41fb-8c41-06e0f16b3013" name="Changes" comment="javafx removed, javadoc comments added, other finalising changes">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/customers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/customers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/menus.csv" beforeDir="false" afterPath="$PROJECT_DIR$/menus.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orders.csv" beforeDir="false" afterPath="$PROJECT_DIR$/orders.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reservations.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reservations.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restaurant-management-system.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bill.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Chef.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FoodItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/FoodItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MenuCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/MenuCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NoTablesFileException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/NoTablesFileException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Restaurant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystemMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RestaurantManagementSystemSimulation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Waiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Waiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Bill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Bill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Booking.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Chef.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Chef.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/FoodItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/FoodItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/FxFXMLController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/MenuCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/MenuCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/NoTablesFileException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Restaurant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemSimulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/RestaurantManagementSystemSimulation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Waiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rms/restaurantmanagementsystemgui/Waiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/rms/restaurantmanagementsystemgui/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/rms/restaurantmanagementsystemgui/menu.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,31 +53,37 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2Huafy1X40iHybgK9Fz4ErIaJEY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jason/Desktop/College/Modules/CS4013/Project/restaurant-management-system-gui&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindowRun.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/jason/Desktop/College/Modules/CS4013/Project/restaurant-management-system-gui/src/main/resources/com/rms/restaurantmanagementsystemgui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "actions.on.save"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\jason\Desktop\College\Modules\CS4013\Project\restaurant-management-system-gui" />
       <recent name="C:\Users\jason\Desktop\College\Modules\CS4013\Project\restaurant-management-system-gui\src\main\resources\com\rms\restaurantmanagementsystemgui" />
+      <recent name="C:\Users\jason\Desktop\College\Modules\CS4013\Project\restaurant-management-system-gui" />
       <recent name="C:\Users\jason\Desktop\College\Modules\CS4013\Project\restaurant-management-system-gui\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.rms.restaurantmanagementsystemgui" />
     </key>
   </component>
   <component name="RunManager" selected="Application.RMS">
@@ -132,8 +119,16 @@
       <workItem from="1669146079130" duration="2072000" />
       <workItem from="1669173023321" duration="42055000" />
       <workItem from="1669251973299" duration="302000" />
-      <workItem from="1669252318584" duration="309000" />
+      <workItem from="1669252318584" duration="23115000" />
     </task>
+    <task id="LOCAL-00001" summary="project transformed to maven with javafx, other changes">
+      <created>1669252769619</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669252769619</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +144,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="project transformed to maven with javafx, other changes" />
+    <MESSAGE value="javafx removed, javadoc comments added, other finalising changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="javafx removed, javadoc comments added, other finalising changes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -10,24 +10,33 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * the overall restaurant management system class
+ *
+ * @author Jason Gill
+ */
 public class RestaurantManagementSystem {
-    Scanner scanner;
 
-    ArrayList<Restaurant> restaurants = new ArrayList<>();
+    private final ArrayList<Restaurant> restaurants = new ArrayList<>();
 
-    TreeMap<Integer, ArrayList<Table>> tablesData = new TreeMap<>();
-    TreeMap<Integer, Menu> menusData = new TreeMap<>();
+    private final TreeMap<Integer, ArrayList<Table>> tablesData = new TreeMap<>();
+    private final TreeMap<Integer, Menu> menusData = new TreeMap<>();
 
-    TreeMap<Integer, ArrayList<Waiter>> waitersData = new TreeMap<>();
-    TreeMap<Integer, ArrayList<Chef>> chefsData = new TreeMap<>();
+    private final TreeMap<Integer, ArrayList<Waiter>> waitersData = new TreeMap<>();
+    private final TreeMap<Integer, ArrayList<Chef>> chefsData = new TreeMap<>();
 
-    TreeMap<Integer, ArrayList<Reservation>> reservationsData = new TreeMap<>();
+    private final TreeMap<Integer, ArrayList<Reservation>> reservationsData = new TreeMap<>();
 
-    HashMap<Integer, Customer> customers = new HashMap<>();
-    HashMap<Integer, ArrayList<Order>> ordersData = new HashMap<>();
+    private final HashMap<Integer, Customer> customers = new HashMap<>();
+    private final HashMap<Integer, ArrayList<Order>> ordersData = new HashMap<>();
 
-    ScheduledExecutorService scheduledExecutor;
+    private final ScheduledExecutorService scheduledExecutor;
 
+    /**
+     * creates a new restaurant management system.
+     * reads data in from external CSV files and creates restaurants in the system.
+     * starts reminder service to remind customers 24 hours before their reservation
+     */
     public RestaurantManagementSystem() {
 
         try {
@@ -72,11 +81,14 @@ public class RestaurantManagementSystem {
         sendReminders();
     }
 
+    /**
+     * stops customer reminder service
+     */
     public void stopRemindersService() {
         scheduledExecutor.shutdown();
     }
 
-    public void sendReminders() {
+    private void sendReminders() {
         for (Restaurant restaurant : restaurants) {
             for (Reservation r : restaurant.getReservations()) {
                 if (r.getCustomerId() != 0 && (r.getStartTime().minusDays(1).truncatedTo(ChronoUnit.MINUTES).isEqual(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)))) {
@@ -86,6 +98,14 @@ public class RestaurantManagementSystem {
         }
     }
 
+    /**
+     * returns income summary for given restaurants during given time period
+     *
+     * @param r    restaurant
+     * @param from LocalDate from
+     * @param to   LocalDate to
+     * @return hash map of LocalDate -> double where the doubles are the income generated on that date
+     */
     public HashMap<LocalDate, Double> getIncomeSummary(Restaurant r, LocalDate from, LocalDate to) {
 
         HashMap<LocalDate, Double> output = new HashMap<>();
@@ -121,6 +141,11 @@ public class RestaurantManagementSystem {
         return output;
     }
 
+    /**
+     * reads data from external CSV files and converts into more useful data structures, mainly hash maps
+     *
+     * @throws FileNotFoundException if a CSV file is missing
+     */
     private void initRestaurantData() throws FileNotFoundException {
 
         File tablesFile = new File("tables.csv");
@@ -290,6 +315,11 @@ public class RestaurantManagementSystem {
 
     }
 
+    /**
+     * returns list of restaurants in the system
+     *
+     * @return array list of restaurants
+     */
     public ArrayList<Restaurant> getRestaurants() {
         return restaurants;
     }

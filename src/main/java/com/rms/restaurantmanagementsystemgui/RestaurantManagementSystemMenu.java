@@ -7,6 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
+/**
+ * allows user to interact with restaurant management system via CLI
+ *
+ * @author Jason Gill
+ */
 public class RestaurantManagementSystemMenu {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yy");
@@ -17,10 +22,18 @@ public class RestaurantManagementSystemMenu {
     private Restaurant currentRestaurant;
     RestaurantManagementSystem rms;
 
+    /**
+     * creates new restaurant management system menu
+     */
     public RestaurantManagementSystemMenu() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * start running CLI menu and link to an existing restaurant management system
+     *
+     * @param rms Restaurant Management System this menu interacts with
+     */
     public void run(RestaurantManagementSystem rms) {
 
         this.rms = rms;
@@ -69,7 +82,10 @@ public class RestaurantManagementSystemMenu {
 
     /*
      * customer methods
+     *
+     * no Javadoc comments as these methods are private
      */
+
     private void makeReservation() {
         System.out.println("For what date are you creating a reservation? (dd/mm/yy)");
         LocalDate date = getDate();
@@ -126,13 +142,16 @@ public class RestaurantManagementSystemMenu {
     }
 
     private void payForOrder() {
-        ArrayList<Order> outstandingOrders = currentRestaurant.getOutstandingOrder();
+        ArrayList<Order> outstandingOrders = currentRestaurant.getOutstandingOrders();
         if (outstandingOrders.size() == 0) {
             System.out.println("There are no unpaid orders.");
             return;
         }
-        System.out.println("Choose an order:");
-        Order o = getChoice(outstandingOrders);
+        System.out.println("Choose an order or 0 to go back:");
+        Order o = getChoice(outstandingOrders, true);
+        if (o == null) {
+            return;
+        }
         System.out.println("If you'd like to tip, please enter the amount in decimal format. If not, enter 0");
         double tip = -1;
         while (tip < 0) {
@@ -240,10 +259,11 @@ public class RestaurantManagementSystemMenu {
 
     /*
      * staff methods
+     *
+     * no Javadoc comments as these methods are private
      */
     private void staffMode() {
-        // TODO: change back to false before final
-        boolean logInSuccessful = true;
+        boolean logInSuccessful = false;
 
         while (!logInSuccessful) {
             System.out.println("Enter username or 0 leave staff mode:");
@@ -273,7 +293,7 @@ public class RestaurantManagementSystemMenu {
 
             System.out.println("Choose an option to continue:");
             //noinspection SpellCheckingInspection
-            System.out.println("A)lter order status I)ncome summary W)alk-in booking O)rder L)og out");
+            System.out.println("A)lter order status I)ncome summary W)alk-in booking O)rder V)iew orders L)og out");
             String input = scanner.nextLine().toUpperCase();
 
             switch (input) {
@@ -282,11 +302,11 @@ public class RestaurantManagementSystemMenu {
                 case "I" -> incomeSummery();
                 case "W" -> walkInBooking();
                 case "O" -> order();
+                case "V" -> listOrders();
             }
 
         }
     }
-
 
     private void incomeSummery() {
         System.out.println("Please enter the from date in the format dd/mm/yy:");
@@ -334,7 +354,7 @@ public class RestaurantManagementSystemMenu {
     }
 
     private void alterOrderStatus() {
-        ArrayList<Order> ordersInProgress = currentRestaurant.getOutstandingOrder();
+        ArrayList<Order> ordersInProgress = currentRestaurant.getOutstandingOrders();
         if (ordersInProgress.size() == 0) {
             System.out.println("There are no orders in progress.");
             return;
@@ -347,12 +367,23 @@ public class RestaurantManagementSystemMenu {
         System.out.printf("Status updated to %s successfully.\n", statusToSet);
     }
 
+    private void listOrders() {
+        ArrayList<Order> outstandingOrders = currentRestaurant.getOutstandingOrders();
+        if (outstandingOrders.size() == 0) {
+            System.out.println("There are no active orders.");
+            return;
+        }
+        outstandingOrders.forEach(order -> System.out.println(order.orderSummery()));
+    }
+
     /*
      * end staff methods
      */
 
     /*
      * utility methods
+     *
+     * no Javadoc comments as these methods are private
      */
 
     private <T> T getChoice(List<T> options) {
