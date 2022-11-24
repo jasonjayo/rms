@@ -1,12 +1,16 @@
+package com.rms.restaurantmanagementsystemgui;
+
 public class FoodItem {
 
-    public String name;
-    public double price;
+    private String name;
+    private double price;
 
+    private int id;
 
-    public FoodItem(String name, double price) {
+    public FoodItem(String name, double price, int id) {
         this.price = price;
         this.name = name;
+        this.id = id;
     }
 
     public double getPrice() {
@@ -15,6 +19,10 @@ public class FoodItem {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

@@ -1,3 +1,5 @@
+package com.rms.restaurantmanagementsystemgui;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +11,6 @@ public class Reservation {
     int customerId;
     LocalDateTime startTime;
     LocalDateTime endTime;
-
 
     public Reservation(Table t, int numOfPeople, int customerId, LocalDateTime startTime, LocalDateTime endTime) {
         this.table = t;

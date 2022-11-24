@@ -1,7 +1,13 @@
+package com.rms.restaurantmanagementsystemgui;
+
 import java.util.ArrayList;
 
 
-public class Waiter {
+public class Waiter extends Staff {
+
+    public Waiter(int id, String name, String password, int restaurantId) {
+        super(id, name, password, restaurantId);
+    }
 
     private int tableID;
     private int customerID; /*dunno if this is needed */

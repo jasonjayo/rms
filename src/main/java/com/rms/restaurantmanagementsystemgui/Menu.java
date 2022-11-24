@@ -1,3 +1,5 @@
+package com.rms.restaurantmanagementsystemgui;
+
 import java.util.ArrayList;
 
 public class Menu {

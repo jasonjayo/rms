@@ -1,3 +1,5 @@
+package com.rms.restaurantmanagementsystemgui;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,14 +29,16 @@ public class Restaurant {
     LocalTime openTime = LocalTime.of(12, 0);
     LocalTime closeTime = LocalTime.of(21, 0);
 
-    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, HashMap<Integer, Customer> customers, ArrayList<Reservation> reservations, ArrayList<Chef> chefs) {
+    public Restaurant(String name, int id, ArrayList<Table> tables, Menu menu, HashMap<Integer, Customer> customers, ArrayList<Reservation> reservations, ArrayList<Chef> chefs, ArrayList<Waiter> waiters, ArrayList<Order> incompleteOrders) {
         this.id = id;
         this.name = name;
         this.menu = menu;
         this.customers = customers;
         this.reservations = reservations;
         this.chefs = chefs;
+        this.waiters = waiters;
         this.tables = tables;
+        this.orders = incompleteOrders;
     }
 
     public String getName() {
@@ -118,6 +122,10 @@ public class Restaurant {
         return o;
     }
 
+    public void cancelOrder(Order o) {
+        orders.remove(o);
+    }
+
     public ArrayList<Order> getOutstandingOrder() {
         ArrayList<Order> outstandingOrders = new ArrayList<>();
         for (Order o : orders) {
@@ -126,6 +134,10 @@ public class Restaurant {
             }
         }
         return outstandingOrders;
+    }
+
+    public ArrayList<Chef> getChefs() {
+        return chefs;
     }
 
     public boolean cancelReservation(int customerId, LocalDateTime dateTime) {
@@ -165,5 +177,12 @@ public class Restaurant {
 
     public ArrayList<Reservation> getReservations() {
         return reservations;
+    }
+
+    public boolean login(String username, String password) {
+        ArrayList<Staff> staff = new ArrayList<>();
+        staff.addAll(chefs);
+        staff.addAll(waiters);
+        return staff.stream().anyMatch(s -> (s.getName().equals(username) && s.getPassword().equals(password)));
     }
 }

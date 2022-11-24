@@ -1,7 +1,10 @@
+package com.rms.restaurantmanagementsystemgui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -14,9 +17,14 @@ public class RestaurantManagementSystem {
 
     TreeMap<Integer, ArrayList<Table>> tablesData = new TreeMap<>();
     TreeMap<Integer, Menu> menusData = new TreeMap<>();
+
+    TreeMap<Integer, ArrayList<Waiter>> waitersData = new TreeMap<>();
+    TreeMap<Integer, ArrayList<Chef>> chefsData = new TreeMap<>();
+
     TreeMap<Integer, ArrayList<Reservation>> reservationsData = new TreeMap<>();
 
     HashMap<Integer, Customer> customers = new HashMap<>();
+    HashMap<Integer, ArrayList<Order>> ordersData = new HashMap<>();
 
     ScheduledExecutorService scheduledExecutor;
 
@@ -44,10 +52,13 @@ public class RestaurantManagementSystem {
                 tablesData.computeIfAbsent(id, k -> new ArrayList<>());
                 menusData.computeIfAbsent(id, k -> new Menu());
                 reservationsData.computeIfAbsent(id, k -> new ArrayList<>());
+                chefsData.computeIfAbsent(id, k -> new ArrayList<>());
+                waitersData.computeIfAbsent(id, k -> new ArrayList<>());
+                ordersData.computeIfAbsent(id, k -> new ArrayList<>());
 
-                Restaurant restaurant = new Restaurant(name, id, tablesData.get(id), menusData.get(id), customers, reservationsData.get(id), new ArrayList<>());
+
+                Restaurant restaurant = new Restaurant(name, id, tablesData.get(id), menusData.get(id), customers, reservationsData.get(id), chefsData.get(id), waitersData.get(id), ordersData.get(id));
                 restaurants.add(restaurant);
-
 
             }
 
@@ -57,7 +68,8 @@ public class RestaurantManagementSystem {
         }
 
         scheduledExecutor = Executors.newScheduledThreadPool(1);
-//        scheduledExecutor.scheduleAtFixedRate(this::sendReminders, 0, 1, TimeUnit.MINUTES);
+        scheduledExecutor.scheduleAtFixedRate(this::sendReminders, 5, 1, TimeUnit.MINUTES);
+        sendReminders();
     }
 
     public void stopRemindersService() {
@@ -65,9 +77,11 @@ public class RestaurantManagementSystem {
     }
 
     public void sendReminders() {
-        for (ArrayList<Reservation> reservationsList : reservationsData.values()) {
-            for (Reservation r : reservationsList) {
-                System.out.printf("AUTO REMINDER SYSTEM: System sent a reminder to customer %s at %s about the following reservation: \n %s\n", customers.get(r.getCustomerId()).getName(), customers.get(r.getCustomerId()).getPhoneNum(), r);
+        for (Restaurant restaurant : restaurants) {
+            for (Reservation r : restaurant.getReservations()) {
+                if (r.getCustomerId() != 0 && (r.getStartTime().minusDays(1).truncatedTo(ChronoUnit.MINUTES).isEqual(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)))) {
+                    System.out.printf("AUTO REMINDER SYSTEM: System sent a reminder to customer %s at %s about the following reservation: \n %s\n", customers.get(r.getCustomerId()).getName(), customers.get(r.getCustomerId()).getPhoneNum(), r);
+                }
             }
         }
     }
@@ -85,10 +99,11 @@ public class RestaurantManagementSystem {
 
                 String[] data = scanner.nextLine().split(",");
                 LocalDate date = LocalDateTime.parse(data[0]).toLocalDate();
-                int restaurantId = Integer.parseInt(data[1]);
-                double income = Double.parseDouble(data[2]);
+                int restaurantId = Integer.parseInt(data[2]);
+                double income = Double.parseDouble(data[3]);
+                String status = data[6];
 
-                if (date.isAfter(from.minusDays(1)) && date.isBefore(to.plusDays(1)) && restaurantId == r.getId()) {
+                if (date.isAfter(from.minusDays(1)) && date.isBefore(to.plusDays(1)) && restaurantId == r.getId() && status.equalsIgnoreCase("paid")) {
                     double subTotal = 0;
                     if (output.containsKey(date)) {
                         subTotal = output.get(date);
@@ -106,7 +121,7 @@ public class RestaurantManagementSystem {
         return output;
     }
 
-    public void initRestaurantData() throws FileNotFoundException {
+    private void initRestaurantData() throws FileNotFoundException {
 
         File tablesFile = new File("tables.csv");
         Scanner tablesFileScanner = new Scanner(tablesFile);
@@ -119,6 +134,11 @@ public class RestaurantManagementSystem {
 
         File reservationsFile = new File("reservations.csv");
         Scanner reservationsFileScanner = new Scanner(reservationsFile);
+
+        File staffFile = new File("staff.csv");
+        Scanner staffFileScanner = new Scanner(staffFile);
+
+        Scanner ordersFileScanner = new Scanner(new File("orders.csv"));
 
         while (tablesFileScanner.hasNextLine()) {
 
@@ -143,7 +163,7 @@ public class RestaurantManagementSystem {
             // csv files in format restaurant id, category, item, price
             int id = Integer.parseInt(line[0]);
             String category = line[1];
-            FoodItem food = new FoodItem(line[2], Double.parseDouble(line[3]));
+            FoodItem food = new FoodItem(line[2], Double.parseDouble(line[3]), Integer.parseInt(line[4]));
 
             if (!menusData.containsKey(id)) {
                 menusData.put(id, new Menu());
@@ -204,6 +224,67 @@ public class RestaurantManagementSystem {
                 reservationsData.put(restaurantId, new ArrayList<>());
             }
             reservationsData.get(restaurantId).add(reservation);
+
+        }
+
+        while (staffFileScanner.hasNextLine()) {
+
+            String line = staffFileScanner.nextLine();
+            // csv files in format staff id, username, password, role, restaurant id
+            String[] staffData = line.split(",");
+
+            int id = Integer.parseInt(staffData[0]);
+            String name = staffData[1];
+            String password = staffData[2];
+            String role = staffData[3];
+            int restaurantId = Integer.parseInt(staffData[4]);
+
+            if (role.equals("waiter")) {
+                Waiter waiter = new Waiter(id, name, password, restaurantId);
+                if (!waitersData.containsKey(restaurantId)) {
+                    waitersData.put(restaurantId, new ArrayList<>());
+                }
+                waitersData.get(restaurantId).add(waiter);
+            } else if (role.equals("chef")) {
+                Chef chef = new Chef(id, name, password, restaurantId);
+                if (!chefsData.containsKey(restaurantId)) {
+                    chefsData.put(restaurantId, new ArrayList<>());
+                }
+                chefsData.get(restaurantId).add(chef);
+            }
+
+
+        }
+
+        while (ordersFileScanner.hasNextLine()) {
+
+            String line = ordersFileScanner.nextLine();
+            // csv files in format time, restaurant id, total cost, items, paid
+            String[] orderData = line.split(",");
+
+            String orderStatus = orderData[6];
+            if (!orderStatus.equals("paid")) {
+                //DateTimeFormatter.ISO_LOCAL_DATE_TIME), orderID, restaurantID, bill.getBillTotal(), tableID, serialisedItems, "false"
+                int orderId = Integer.parseInt(orderData[1]);
+                int restaurantId = Integer.parseInt(orderData[2]);
+                int tableId = Integer.parseInt(orderData[4]);
+                int[] itemsIds = Arrays.stream(orderData[5].split(";")).mapToInt(Integer::parseInt).toArray();
+
+                Order o = new Order(tableId, restaurantId, orderId);
+                for (int itemId : itemsIds) {
+                    menusData.get(restaurantId).getAllItems().forEach(menuItem -> {
+                        if (itemId == menuItem.getId()) {
+                            o.addFood(menuItem);
+                        }
+                    });
+                }
+                o.setOrderStatus(Order.Status.valueOf(orderStatus.toUpperCase()), false);
+                if (!ordersData.containsKey(restaurantId)) {
+                    ordersData.put(restaurantId, new ArrayList<>());
+                }
+                ordersData.get(restaurantId).add(o);
+            }
+
 
         }
 

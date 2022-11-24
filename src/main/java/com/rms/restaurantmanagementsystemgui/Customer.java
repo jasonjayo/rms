@@ -1,3 +1,5 @@
+package com.rms.restaurantmanagementsystemgui;
+
 public class Customer {
 
     // TODO: loyalty system

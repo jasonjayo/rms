@@ -1,47 +1,47 @@
-1,starters,Soup,5
-1,starters,Seafood Chowder,5
-1,starters,Garlic Bread,5
-1,starters,Chicken Wings,5
-1,starters,Tiger Prawns,5
-1,starters,Brie Nuggets,5
-1,mains,Caesar Salad,13
-1,mains,Steak Sandwich,18
-1,mains,10oz Steak,25
-1,mains,Lamb Cutlets,20
-1,mains,Chicken Curry,15
-1,mains,Peppered Chicken,15
-1,desserts,Chocolate Fudge Cake,7
-1,desserts,Apple Crumble,7
-1,desserts,Ice cream Selection,7
-1,desserts,Biscoff Cheesecake,7
-1,drinks,Coke,3
-1,drinks,Fanta,3
-1,drinks,7up,3
-1,drinks,Pt Guinness,5
-1,drinks,Water,5
-2,starters,Coral Bits,2
-2,starters,Kelp Rings,2
-2,starters,Salty Sea Dog,2
-2,mains,Krabby Patty,5
-2,mains,Double Krabby Patty,5
-2,mains,Golden Loaf,5
-2,mains,Krabby Pizza,5
-2,desserts,Krabby Kake,3
-2,desserts,Kale Krumble,3
-2,desserts,Walk the Plank,3
-2,drinks,Seafoam Soda,1
-2,drinks,Super Seaweed Shake,2
-2,drinks,Seawater,1
-2,drinks,Kelp Shake,2
-3,starters,Space Soup,3
-3,starters,Celestial Chips,3
-3,starters,Galactic Garlic Bread,3
-3,mains,Rocket Flame Steak,10
-3,mains,Gemini Burger,10
-3,mains,Spaceghetti Meatballs,10
-3,desserts,Pluto Pie,5
-3,desserts,Peanut Carmel Comet,5
-3,desserts,Cosmic Cupcake,5
-3,drinks,Lightyear Lemonade,3
-3,drinks,The Milky Way,4
-3,drinks,Stargarita,5
+1,starters,Soup,5,1
+1,starters,Seafood Chowder,5,2
+1,starters,Garlic Bread,5,3
+1,starters,Chicken Wings,5,4
+1,starters,Tiger Prawns,5,5
+1,starters,Brie Nuggets,5,6
+1,mains,Caesar Salad,13,7
+1,mains,Steak Sandwich,18,8
+1,mains,10oz Steak,25,9
+1,mains,Lamb Cutlets,20,10
+1,mains,Chicken Curry,15,11
+1,mains,Peppered Chicken,15,12
+1,desserts,Chocolate Fudge Cake,7,13
+1,desserts,Apple Crumble,7,14
+1,desserts,Ice cream Selection,7,15
+1,desserts,Biscoff Cheesecake,7,16
+1,drinks,Coke,3,17
+1,drinks,Fanta,3,18
+1,drinks,7up,3,19
+1,drinks,Pt Guinness,5,20
+1,drinks,Water,5,21
+2,starters,Coral Bits,2,21
+2,starters,Kelp Rings,2,22
+2,starters,Salty Sea Dog,2,23
+2,mains,Krabby Patty,5,24
+2,mains,Double Krabby Patty,5,25
+2,mains,Golden Loaf,5,26
+2,mains,Krabby Pizza,5,27
+2,desserts,Krabby Kake,3,28
+2,desserts,Kale Krumble,3,29
+2,desserts,Walk the Plank,3,30
+2,drinks,Seafoam Soda,1,31
+2,drinks,Super Seaweed Shake,2,32
+2,drinks,Seawater,1,33
+2,drinks,Kelp Shake,2,34
+3,starters,Space Soup,3,35
+3,starters,Celestial Chips,3,36
+3,starters,Galactic Garlic Bread,3,37
+3,mains,Rocket Flame Steak,10,38
+3,mains,Gemini Burger,10,39
+3,mains,Spaceghetti Meatballs,10,40
+3,desserts,Pluto Pie,5,41
+3,desserts,Peanut Carmel Comet,5,42
+3,desserts,Cosmic Cupcake,5,43
+3,drinks,Lightyear Lemonade,3,44
+3,drinks,The Milky Way,4,45
+3,drinks,Stargarita,5,46

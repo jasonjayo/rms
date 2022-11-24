@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/restaurant-management-system.iml" filepath="$PROJECT_DIR$/restaurant-management-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/restaurant-management-system-gui.iml" filepath="$PROJECT_DIR$/restaurant-management-system-gui.iml" />
     </modules>
   </component>
 </project>
