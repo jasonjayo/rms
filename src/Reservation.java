@@ -10,6 +10,7 @@ public class Reservation {
     LocalDateTime startTime;
     LocalDateTime endTime;
 
+
     public Reservation(Table t, int numOfPeople, int customerId, LocalDateTime startTime, LocalDateTime endTime) {
         this.table = t;
         this.numOfPeople = numOfPeople;
